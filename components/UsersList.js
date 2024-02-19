@@ -1,11 +1,19 @@
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
 function UsersList({ users, startingLetter }) {
-  
+  users = useMemo(() => {
+    if (startingLetter) {
+      return users.filter((user) => user.name.startsWith(startingLetter));
+    }
+
+    return users;
+  }, [startingLetter]);
 
   return (
     <ul>
-      <li key={}>{}</li>
+      {users.map((user) => (
+        <li key={user.id}>{user.name}</li>
+      ))}
     </ul>
   );
 }
